@@ -1,7 +1,7 @@
 import * as types from '../action-types.js'
 
 const initState = {
-  msg: '123',
+  num: 0,
   bol: false,
 }
 export default (state = initState, { type, data }) => {
@@ -9,12 +9,17 @@ export default (state = initState, { type, data }) => {
     case types.ADD_NUMBER:
       return {
         ...state,
-        msg: data,
+        num: state.num + data,
       }
-    case types.ADD_NUMBER:
+    case types.REDUCE_NUMBER:
       return {
         ...state,
-        msg: data,
+        num: state.num - data,
+      }
+    case types.RESET_ACTION:
+      return {
+        ...state,
+        num: initState.num,
       }
     default:
       return state
