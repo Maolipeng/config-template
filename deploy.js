@@ -3,7 +3,7 @@ const ora = require('ora')
 const chalk = require('chalk')
 const path = require('path')
 const buildPathDev = path.resolve(__dirname, './dist')
-const { deployConfigFn } = require('./configs/configFn.js')
+const { deployConfigFn } = require('./configs/rc.js')
 
 const client = new Client()
 

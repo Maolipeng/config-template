@@ -2,7 +2,7 @@ const inquirer = require('inquirer')
 const ini = require('ini')
 const chalkPipe = require('chalk-pipe')
 
-const { DEPLOY_CONFIG } = require('./deploy.js')
+const { DEPLOY_CONFIG } = require('./constants.js')
 // const link = chalkPipe('blue.underline');
 const error = chalkPipe('bgRed.#cccccc')
 const warning = chalkPipe('orange.bold')
