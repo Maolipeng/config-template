@@ -1,6 +1,7 @@
 {
   "name": "my-app",
   "version": "0.1.0",
+  "description": "A react project template to generate a new react project quickly",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
@@ -27,6 +28,8 @@
     "deploy": "yarn build && node ./deploy.js",
     "eject": "react-scripts eject"
   },
+  "author": "maolipeng",
+  "license": "ISC",
   "eslintConfig": {
     "extends": "react-app"
   },
