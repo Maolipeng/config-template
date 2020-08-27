@@ -1,7 +1,7 @@
-const proxyConfig = require('./proxy.js');
-const deployConfig = require('./deploy.js');
+const proxyConfig = require('./proxy.js')
+const RC = require('./rc.js')
 
 module.exports = {
   proxyConfig,
-  deployConfig
+  RC,
 }
