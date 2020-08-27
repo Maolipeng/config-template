@@ -7,13 +7,14 @@ const { DEPLOY_CONFIG } = require('./constants.js')
 const error = chalkPipe('bgRed.#cccccc')
 const warning = chalkPipe('orange.bold')
 const tip = chalkPipe('bgBlue')
+const defaultChoices = [...Object.keys(DEPLOY_CONFIG), 'custom']
 
 const defaultPrompt = [
   {
     type: 'list',
     name: 'deployConfig',
     message: '请选择你要部署的服务器',
-    choices: ['develop', 'test', 'custom'],
+    choices: defaultChoices,
   },
 ]
 const customInputConfig = {
