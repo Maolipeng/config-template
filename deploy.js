@@ -1,46 +1,51 @@
+const Client = require('ssh2-sftp-client')
+const ora = require('ora')
+const chalk = require('chalk')
+const path = require('path')
+const buildPathDev = path.resolve(__dirname, './dist')
+const { deployConfigFn } = require('./configs/configFn.js')
 
-const Client = require('ssh2-sftp-client');
-const path = require('path');
-const { deployConfig } = require('./configs')
-const client = new Client();
-const buildPathDev = path.resolve(__dirname, './dist');
-
-const { host, port, username, password, buildPathServer } = deployConfig;
-if (!host || !port || !username || !password || !buildPathServer) {
-  console.error('请填写部署服务器配置');
-  return;
-}
-
-const config = {
-  host,
-  port,
-  username,
-  password
-}
+const client = new Client()
 
 async function main() {
   try {
-    await client.connect(config);
+    const {
+      host,
+      port,
+      username,
+      password,
+      buildPathServer,
+    } = await deployConfigFn()
+
+    await client.connect({
+      host,
+      port,
+      username,
+      password,
+    })
     const isExits = await client.exists(buildPathServer)
     if (!isExits) {
       await client.mkdir(buildPathServer, true)
     } else {
       await client.rmdir(buildPathServer, true)
     }
-    client.on('upload', info => {
-      console.log(`uploading: Uploaded ${info.source}`);
-    });
+    let loading = ora(chalk.yellowBright('uploading...'))
+    loading.color = 'yellow'
+    client.on('upload', (info) => {
+      loading.start()
+    })
     const uploadRes = await client.uploadDir(buildPathDev, buildPathServer)
-    console.log('uploadRes', uploadRes);
+    loading.succeed()
+    console.log(chalk.blue(`上传${uploadRes}`))
   } finally {
-    client.end();
+    client.end()
   }
 }
 
 main()
-  .then(msg => {
-    console.log('上传成功');
+  .then((msg) => {
+    console.log(chalk.green('上传成功'))
   })
-  .catch(err => {
-    console.log(`main error: ${err.message}`);
-  });
+  .catch((err) => {
+    console.log(`main error: ${err.message}`)
+  })
