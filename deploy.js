@@ -10,19 +10,10 @@ const client = new Client()
 
 async function main() {
   try {
-    const {
-      host,
-      port,
-      username,
-      password,
-      buildPathServer,
-    } = await deployConfigFn()
+    const { buildPathServer, ...configs } = await deployConfigFn()
 
     await client.connect({
-      host,
-      port,
-      username,
-      password,
+      ...configs,
     })
     const isExits = await client.exists(buildPathServer)
     if (!isExits) {
