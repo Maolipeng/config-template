@@ -67,11 +67,11 @@ configs        // 配置文件目录
   - deploy 服务器的配置放在了 constants.js 里面，配置方法放在了 rc.js 用来完成配置部署服务器
   ```
   {
-    host: '192.168.0.42',                                  // 地址
-    port: 2822,                                           // 端口
-    username: 'root',                                    // 用户名
-    password: 'Rea1aI@2+kWU13G',                        // 密码
-    buildPathServer: '/data/app/openresty/codes/pages' // 部署路径
+    host: '*****',                                  // 地址
+    port: ****,                                           // 端口
+    username: '****',                                    // 用户名
+    password: '*****',                        // 密码
+    buildPathServer: '*******' // 部署路径
   }
   ```
 
